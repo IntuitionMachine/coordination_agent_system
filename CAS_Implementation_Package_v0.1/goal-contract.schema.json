@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://example.org/cas/schemas/goal-contract.v1.json",
+  "title":"CAS Goal Contract v1",
+  "type":"object","additionalProperties":false,
+  "required":["title","objective","success_criteria","constraints","preferences","owner_principal_id"],
+  "properties":{
+    "title":{"type":"string","minLength":1},
+    "objective":{"type":"string","minLength":1},
+    "success_criteria":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "constraints":{"type":"array","items":{"type":"string"}},
+    "preferences":{"type":"array","items":{"type":"string"}},
+    "owner_principal_id":{"type":"string","minLength":1}
+  }
+}

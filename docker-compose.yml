@@ -1,0 +1,16 @@
+# PostgreSQL for running CAS outside the embedded development database.
+#   docker compose up -d
+#   export CAS_DATABASE_URL=postgresql://cas:cas-local-dev@127.0.0.1:5432/cas
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cas
+      POSTGRES_PASSWORD: cas-local-dev
+      POSTGRES_DB: cas
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - cas-pg:/var/lib/postgresql/data
+volumes:
+  cas-pg:

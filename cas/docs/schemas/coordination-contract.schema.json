@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/cas/schemas/coordination-contract.v1.json",
+  "title": "CAS Coordination Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["goal_id","title","objective","requester_id","input_refs","dependency_ids","deliverable_spec","acceptance_checks","permission_scope","escalation_policy","max_attempts"],
+  "properties": {
+    "goal_id": {"type":"string","minLength":1},
+    "title": {"type":"string","minLength":1},
+    "objective": {"type":"string","minLength":1},
+    "requester_id": {"type":"string","minLength":1},
+    "owner_id": {"type":"string"},
+    "parent_contract_id": {"type":"string"},
+    "input_refs": {"type":"array","items":{"type":"object","additionalProperties":false,"required":["artifact_id","required_version","mode"],"properties":{"artifact_id":{"type":"string","minLength":1},"required_version":{"type":"string","minLength":1},"mode":{"enum":["exact","latest_accepted"]}}}},
+    "dependency_ids": {"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
+    "deliverable_spec": {"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["type"],"properties":{"type":{"type":"string","minLength":1},"schema_ref":{"type":"string"}}}},
+    "acceptance_checks": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "permission_scope": {"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
+    "priority": {"type":"integer","minimum":0,"maximum":100,"default":50},
+    "deadline": {"type":"string","format":"date-time"},
+    "max_attempts": {"type":"integer","minimum":1,"maximum":10},
+    "escalation_policy": {"type":"object","additionalProperties":false,"required":["on_stale","on_conflict","decision_owner_id"],"properties":{"on_stale":{"enum":["hold","revalidate"]},"on_conflict":{"enum":["reconcile_then_escalate","escalate"]},"decision_owner_id":{"type":"string","minLength":1}}}
+  }
+}

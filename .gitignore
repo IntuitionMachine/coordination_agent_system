@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.cas-data/
+*.egg-info/
+.claude/
+CAS_Implementation_Package_v0.1.zip

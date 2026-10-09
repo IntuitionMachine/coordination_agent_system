@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'">
+  <title>CAS goal workspace</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">CAS <span>goal workspace</span></div>
+    <label class="goal-picker">Goal <select id="goal-select" aria-label="Goal"></select></label>
+    <button id="new-goal" class="quiet" type="button">New goal</button>
+    <div class="spacer"></div>
+    <div id="whoami" class="whoami"></div>
+    <button id="sign-out" class="quiet" type="button">Sign out</button>
+  </header>
+
+  <div id="notice" class="notice" role="alert" hidden></div>
+
+  <main id="signin" class="signin" hidden>
+    <form id="signin-form">
+      <h1>Sign in</h1>
+      <p>Paste the access credential for your principal. It is kept for this browser tab only.</p>
+      <label for="signin-credential">Access credential</label>
+      <input id="signin-credential" type="password" autocomplete="off" required>
+      <button type="submit">Open workspace</button>
+      <p class="hint">No credential yet? Run <code>cas demo</code> or <code>cas bootstrap --tenant &lt;id&gt;</code> and copy the one it prints.</p>
+    </form>
+  </main>
+
+  <main id="workspace" hidden>
+    <section id="goal-strip" class="goal-strip" aria-label="Goal"></section>
+    <div class="columns">
+      <section class="panel contracts" aria-labelledby="contracts-title">
+        <div class="panel-head">
+          <h2 id="contracts-title">Contracts</h2>
+          <div id="contract-counts" class="counts"></div>
+          <button id="propose-contract" type="button">Propose contract</button>
+        </div>
+        <div id="contract-list"></div>
+      </section>
+      <aside class="side">
+        <section class="panel" aria-labelledby="exceptions-title">
+          <div class="panel-head"><h2 id="exceptions-title">Needs attention</h2><div id="exception-count" class="counts"></div></div>
+          <div id="exception-list"></div>
+        </section>
+        <section class="panel" aria-labelledby="inspector-title">
+          <div class="panel-head"><h2 id="inspector-title">Change inspector</h2><div id="inspector-scope" class="counts"></div></div>
+          <div id="inspector"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <dialog id="dialog"><form method="dialog" id="dialog-form"></form></dialog>
+  <script src="/static/app.js"></script>
+</body>
+</html>
